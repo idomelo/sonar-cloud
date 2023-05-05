@@ -1,0 +1,20 @@
+name: ci-sonarcloud
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  run-ci:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup MSBuild.exe
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: npm install
+
+      - run: npm run test
